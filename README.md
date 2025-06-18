@@ -46,19 +46,18 @@ As in the first implemetation, a REPL session should start and a new tab should 
 The front-end for this implementation is exactly the same as the one in the second implementation. It also has a Clojure back-end in charge of the counter, but now, the data is persisted into a Datomic database. The counter should keep its value even when the back-end is restarted.
 
 #### Running
-In this implementation we can start the back-end in two ways, so, from the root of this repository:
+In this implementation we can set an optional environment variable for the Datomic storage path, so, from the root of this repository:
 - ```shell
   cd implementation_3/back_end
   ```
-- to use the Datomic in-memory storage (included just for debugging reasons):
+- to use the default location for the Datomic storage (/tmp/datomic_test):
   ```shell
    clojure -M -m datomic-counter.core
   ```
-- to use the Datomic file storage (the one that fullfils our requirements, persistance):
+- to use a custom path for Datomic file storage:
   ```shell
-   clojure -J-Ddb=$(pwd) -M -m datomic-counter.core
+   export DB_PATH=<path/to/folder> && clojure -M -m datomic-counter.core
   ```
-  >Here we are using the current directory to put the Datomic database file, but any absolute path should work
 
 To start the front-end, from the root of the repository:
 - ```shell
