@@ -24,7 +24,15 @@ A REPL session should start and a new tab should pop-up in the browser with the 
 This implementation has a front-end written in ClojureScript similar to the first implementation, but now it sends HTTP requests for a back-end written in Clojure, and the back-end is in charge of the counter. The counter should keep its value even when the page is refreshed.
 
 #### Running
-From the root of the repository:
+In this implementation, we have to start the back-end first, so, from the root of this repository:
+- ```shell
+  cd implementation_2/back_end
+  ```
+- ```shell
+  clojure -M -m counter-server.core
+  ```
+
+Now, we start the front-end, and, again, from the root of the repository:
 - ```shell
   cd implementation_2/front_end
   ```
@@ -34,19 +42,25 @@ From the root of the repository:
 
 As in the first implemetation, a REPL session should start and a new tab should pop-up in the browser.
 
-In this implementation we have to start the back-end as well, so, from the root of this repository:
-- ```shell
-  cd implementation_2/back_end
-  ```
-- ```shell
-  clojure -M -m counter-server.core
-  ```
-
 ### Implementation 3
 The front-end for this implementation is exactly the same as the one in the second implementation. It also has a Clojure back-end in charge of the counter, but now, the data is persisted into a Datomic database. The counter should keep its value even when the back-end is restarted.
 
 #### Running
-From the root of the repository:
+In this implementation we can start the back-end in two ways, so, from the root of this repository:
+- ```shell
+  cd implementation_3/back_end
+  ```
+- to use the Datomic in-memory storage (included just for debugging reasons):
+  ```shell
+   clojure -M -m datomic-counter.core
+  ```
+- to use the Datomic file storage (the one that fullfils our requirements, persistance):
+  ```shell
+   clojure -J-Ddb=$(pwd) -M -m datomic-counter.core
+  ```
+  >Here we are using the current directory to put the Datomic database file, but any absolute path should work
+
+To start the front-end, from the root of the repository:
 - ```shell
   cd implementation_3/front_end
   ```
@@ -55,17 +69,3 @@ From the root of the repository:
   ```
 
 As before, a REPL session should start and a new tab should pop-up in the browser.
-
-In this implementation we can start the back-end in two ways, so, from the root of this repository:
-- ```shell
-  cd implementation_3/back_end
-  ```
-- to use the Datomic in-memory storage (included just for test reasons):
-  ```shell
-   clojure -M -m datomic-counter.core
-  ```
-- to use the Datomic file storage (the one that fullfils our requirements):
-  ```shell
-   clojure -J-Ddb=$(pwd) -M -m datomic-counter.core
-  ```
-  >Here we are using the current directory to put the Datomic database file, but any absolute path should work
