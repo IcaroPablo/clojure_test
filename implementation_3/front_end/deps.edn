@@ -1,0 +1,4 @@
+; {:deps {org.clojure/clojurescript {:mvn/version "1.12.42"}}}
+{:deps {org.clojure/clojurescript {:mvn/version "1.12.42"}
+        cljs-http/cljs-http {:mvn/version "0.1.46"}
+        org.clojure/core.async {:mvn/version "1.6.681"}}}
